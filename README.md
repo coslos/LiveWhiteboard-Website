@@ -4,6 +4,8 @@
 
 The Live Whiteboard is a perfect solution for people to connect with each other and write/discuss/scribble their ideas. The main goal is to develop a virtual scribble pad along with means to connect to others at the same time, with the help of chat and recordings. It will help distance learning students to get the blackboard teaching experience, people collaborating on remote projects to discuss and develop their ideas graphically and even just to scribble your own thoughts for fun purposes!
 
+## Live At: https://live-whiteboard-website.herokuapp.com/
+
 ## Development
 
 1) Fork the Repository.
