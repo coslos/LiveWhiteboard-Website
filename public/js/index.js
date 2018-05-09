@@ -10,6 +10,7 @@ $(document).ready(function () {
   const canvas = document.getElementById('whiteboard');
   const colors = document.getElementsByClassName('color');
   const context = canvas.getContext('2d');
+  const slider = document.getElementById('myRange');
 
   let current = {
     color: 'black',
@@ -56,7 +57,9 @@ $(document).ready(function () {
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.strokeStyle = color;
-    context.lineWidth = (strokeWidth ? strokeWidth : 4) / 2;
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
+    context.lineWidth = (strokeWidth ? strokeWidth : slider.value) / 2;
     if (color === "white") {
       context.lineWidth = 25;
     }
@@ -145,7 +148,7 @@ $(document).ready(function () {
       current.sessionId = data.sessionId;
       current.emitTo = 'drawingInSession';
       $topBar.empty().append(`
-        <div class="col-3 ml-auto text-white">Session Id: ${data.sessionId}</div>    
+        <div class="col-3 ml-auto text-white">Session Id: ${data.sessionId}</div>
       `);
       context.clearRect(0, 0, canvas.width, canvas.height);
     }
@@ -157,7 +160,7 @@ $(document).ready(function () {
       current.sessionId = data.sessionId;
       current.emitTo = 'drawingInSession';
       $topBar.empty().append(`
-        <div class="col-3 ml-auto text-white">Session Id: ${data.sessionId}</div>    
+        <div class="col-3 ml-auto text-white">Session Id: ${data.sessionId}</div>
       `);
       context.clearRect(0, 0, canvas.width, canvas.height);
     }
