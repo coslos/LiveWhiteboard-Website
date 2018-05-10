@@ -10,7 +10,7 @@ $(document).ready(function () {
   const canvas = document.getElementById('whiteboard');
   const colors = document.getElementsByClassName('color');
   const context = canvas.getContext('2d');
-  const slider = document.getElementById('myRange');
+  const slider = document.getElementById('formControlRange');
 
   let current = {
     color: 'black',
