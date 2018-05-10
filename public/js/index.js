@@ -4,7 +4,7 @@
 
 'use strict';
 
-$(document).ready(function() {
+$(document).ready(() => {
   const socket = io();
   const $topBar = $('#topBar');
   const canvas = document.getElementById('whiteboard');
@@ -20,7 +20,7 @@ $(document).ready(function() {
   $(window).resize(onResize);
   onResize();
 
-  $('#clear').click(function() {
+  $('#clear').click(() => {
     context.clearRect(0, 0, canvas.width, canvas.height);
   });
 
@@ -29,7 +29,7 @@ $(document).ready(function() {
   canvas.addEventListener('mouseout', onMouseUp);
   canvas.addEventListener('mousemove', throttle(onMouseMove, 5));
 
-  for (var i = 0; i < colors.length; i++) {
+  for (let i = 0; i < colors.length; i++) {
     colors[i].addEventListener('click', onColorUpdate, false);
   }
 
@@ -38,11 +38,11 @@ $(document).ready(function() {
   socket.on('joinedSession', onJoinedSession);
   socket.on('drawingInSession', onDrawingInSessionEvent);
 
-  $('#createSession').click(function() {
+  $('#createSession').click(() => {
     socket.emit('createSession');
   });
 
-  $('#joinSession').click(function() {
+  $('#joinSession').click(() => {
     socket.emit('joinSession', {
       sessionId: $('#sessionIdJoinSession').val()
     });
@@ -114,7 +114,7 @@ $(document).ready(function() {
 
   function throttle(callback, delay) {
     let previousCall = new Date().getTime();
-    return function() {
+    return () => {
       let time = new Date().getTime();
 
       if (time - previousCall >= delay) {
