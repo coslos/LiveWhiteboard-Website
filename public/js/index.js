@@ -20,7 +20,7 @@ $(document).ready(() => {
   $(window).resize(onResize);
   onResize();
 
-  $('#clear').click(() => {
+  $('#clear').click(function() {
     context.clearRect(0, 0, canvas.width, canvas.height);
   });
 
@@ -114,7 +114,7 @@ $(document).ready(() => {
 
   function throttle(callback, delay) {
     let previousCall = new Date().getTime();
-    return () => {
+    return function() {
       let time = new Date().getTime();
 
       if (time - previousCall >= delay) {
