@@ -34,6 +34,8 @@ Pull requests are always welcome! Check [CONTRIBUTING.md](.github/CONTRIBUTING.m
 ## Reach Us
 Your feedbacks are always appreciated. You can reach out to us for any feature or issue. Hit us by reporting an issue here [Issues](https://github.com/coslos/LiveWhiteboard-Website/issues) or mail us [Apoorvaa Gupta](mailto:ag@cb.lk) | [Bhavya Aggarwal](mailto:b@cb.lk).
 
+Now you can also join our gitter room: [Gitter](https://gitter.im/coslos/Lobby)
+
 ## [Code Of Conduct](.github/CODE_OF_CONDUCT.md)
 
 ## [Project RoadMap](.github/ROADMAP.md)
