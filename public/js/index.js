@@ -2,49 +2,49 @@
  * Created by bhavyaagg on 11/01/18.
  */
 
-"use strict";
+'use strict';
 
 $(document).ready(function() {
   const socket = io();
-  const $topBar = $("#topBar");
-  const canvas = document.getElementById("whiteboard");
-  const colors = document.getElementsByClassName("color");
-  const context = canvas.getContext("2d");
+  const $topBar = $('#topBar');
+  const canvas = document.getElementById('whiteboard');
+  const colors = document.getElementsByClassName('color');
+  const context = canvas.getContext('2d');
 
   let current = {
-    color: "black",
-    emitTo: "drawing"
+    color: 'black',
+    emitTo: 'drawing'
   };
   let drawing = false;
 
   $(window).resize(onResize);
   onResize();
 
-  $("#clear").click(function() {
+  $('#clear').click(function() {
     context.clearRect(0, 0, canvas.width, canvas.height);
   });
 
-  canvas.addEventListener("mousedown", onMouseDown);
-  canvas.addEventListener("mouseup", onMouseUp);
-  canvas.addEventListener("mouseout", onMouseUp);
-  canvas.addEventListener("mousemove", throttle(onMouseMove, 5));
+  canvas.addEventListener('mousedown', onMouseDown);
+  canvas.addEventListener('mouseup', onMouseUp);
+  canvas.addEventListener('mouseout', onMouseUp);
+  canvas.addEventListener('mousemove', throttle(onMouseMove, 5));
 
   for (var i = 0; i < colors.length; i++) {
-    colors[i].addEventListener("click", onColorUpdate, false);
+    colors[i].addEventListener('click', onColorUpdate, false);
   }
 
-  socket.on("drawing", onDrawingEvent);
-  socket.on("createdSession", onCreatedSession);
-  socket.on("joinedSession", onJoinedSession);
-  socket.on("drawingInSession", onDrawingInSessionEvent);
+  socket.on('drawing', onDrawingEvent);
+  socket.on('createdSession', onCreatedSession);
+  socket.on('joinedSession', onJoinedSession);
+  socket.on('drawingInSession', onDrawingInSessionEvent);
 
-  $("#createSession").click(function() {
-    socket.emit("createSession");
+  $('#createSession').click(function() {
+    socket.emit('createSession');
   });
 
-  $("#joinSession").click(function() {
-    socket.emit("joinSession", {
-      sessionId: $("#sessionIdJoinSession").val()
+  $('#joinSession').click(function() {
+    socket.emit('joinSession', {
+      sessionId: $('#sessionIdJoinSession').val()
     });
   });
 
@@ -56,7 +56,7 @@ $(document).ready(function() {
     context.lineTo(x1, y1);
     context.strokeStyle = color;
     context.lineWidth = (strokeWidth ? strokeWidth : 4) / 2;
-    if (color === "white") {
+    if (color === 'white') {
       context.lineWidth = 25;
     }
 
@@ -109,7 +109,7 @@ $(document).ready(function() {
   }
 
   function onColorUpdate(e) {
-    current.color = e.target.className.split(" ")[1];
+    current.color = e.target.className.split(' ')[1];
   }
 
   function throttle(callback, delay) {
@@ -152,9 +152,9 @@ $(document).ready(function() {
 
   function onCreatedSession(data) {
     if (data.success) {
-      socket.off("drawing");
+      socket.off('drawing');
       current.sessionId = data.sessionId;
-      current.emitTo = "drawingInSession";
+      current.emitTo = 'drawingInSession';
       $topBar.empty().append(`
         <div class="col-3 ml-auto text-white">Session Id: ${
           data.sessionId
@@ -166,9 +166,9 @@ $(document).ready(function() {
 
   function onJoinedSession(data) {
     if (data.success) {
-      socket.off("drawing");
+      socket.off('drawing');
       current.sessionId = data.sessionId;
-      current.emitTo = "drawingInSession";
+      current.emitTo = 'drawingInSession';
       $topBar.empty().append(`
         <div class="col-3 ml-auto text-white">Session Id: ${
           data.sessionId
