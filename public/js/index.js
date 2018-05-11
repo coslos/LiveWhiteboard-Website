@@ -135,7 +135,9 @@ $(document).ready(() => {
       data.y0 * h + 50,
       data.x1 * w,
       data.y1 * h + 50,
-      data.color
+      data.color,
+      false,
+      data.strokeWidth
     );
   }
 
