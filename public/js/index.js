@@ -133,7 +133,7 @@ $(document).ready(function () {
   function onDrawingEvent(data) {
     let w = canvas.width;
     let h = canvas.height;
-    drawLine(data.x0 * w, data.y0 * h + 50, data.x1 * w, data.y1 * h + 50, data.color);
+    drawLine(data.x0 * w, data.y0 * h + 50, data.x1 * w, data.y1 * h + 50, data.color, false, data.strokeWidth);
   }
 
   function onDrawingInSessionEvent(data) {
