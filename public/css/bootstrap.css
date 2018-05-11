@@ -1984,7 +1984,29 @@ select.form-control:focus::-ms-value {
 .form-control-file,
 .form-control-range {
   display: block;
+  appearance: none;
+  -webkit-appearance: none;
+  height: 20px;
   width: 100%;
+  background: white;
+  outline: none;
+
+}
+
+.form-control-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #354147;
+  cursor: pointer;
+}
+
+.form-control-range::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background: #354147;
+  cursor: pointer;
 }
 
 .col-form-label {

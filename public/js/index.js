@@ -10,6 +10,7 @@ $(document).ready(() => {
   const canvas = document.getElementById('whiteboard');
   const colors = document.getElementsByClassName('color');
   const context = canvas.getContext('2d');
+  const slider = document.getElementById('formControlRange');
 
   let current = {
     color: 'black',
@@ -55,8 +56,10 @@ $(document).ready(() => {
     context.moveTo(x0, y0);
     context.lineTo(x1, y1);
     context.strokeStyle = color;
-    context.lineWidth = (strokeWidth ? strokeWidth : 4) / 2;
-    if (color === 'white') {
+    context.lineJoin = 'round';
+    context.lineCap = 'round';
+    context.lineWidth = (strokeWidth ? strokeWidth : slider.value) / 2;
+    if (color === "white") {
       context.lineWidth = 25;
     }
 
