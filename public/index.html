@@ -1,56 +1,59 @@
 <!doctype html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <title>Live Whiteboard</title>
     <link rel="stylesheet" href="./css/bootstrap.css">
     <link rel="stylesheet" href="./css/index.css">
 </head>
-
 <body>
-    <div class="container-fluid">
-        <div id="topBar" class="row align-items-center no-gutters">
-            <div class="col"></div>
-            <div class="col-2">
-                <button id="createSession" class="btn btn-success">
-                    Create a Session
-                </button>
-            </div>
-            <div class="col-2 ml-1 mr-2">
-                <input id="sessionIdJoinSession" class="form-control" placeholder="Session Id" type="text">
-            </div>
-            <div class="col-2">
-                <button id="joinSession" class="btn btn-success">
-                    Join a Session
-                </button>
-            </div>
+
+<div class="container-fluid">
+    <div id="topBar" class="row align-items-center no-gutters">
+        <div class="form-group ml-2 mt-2">
+            <label for="formControlRange">Line Thickness:</label>
+            <input type="range" min="1" max="100" value="20" class="form-control-range" id="formControlRange">
         </div>
-        <div id="mainContent" class="row">
-            <div class="col">
-                <canvas id="whiteboard"></canvas>
-                <div class="sideBar text-center">
-                    <div class="color black"></div>
-                    <div class="color red"></div>
-                    <div class="color green"></div>
-                    <div class="color blue"></div>
-                    <div class="color white"></div>
-                    <button id="clear" class="m-1 btn btn-danger">X</button>
-                </div>
+        <div class="col"></div>
+        <div class="col-2">
+            <button id="createSession" class="btn btn-success">
+                Create a Session
+            </button>
+        </div>
+        <div class="col-2 ml-1 mr-2">
+            <input id="sessionIdJoinSession" class="form-control" placeholder="Session Id" type="text">
+        </div>
+        <div class="col-2">
+            <button id="joinSession" class="btn btn-success">
+                Join a Session
+            </button>
+        </div>
+    </div>
+    <div id="mainContent" class="row">
+        <div class="col">
+            <canvas id="whiteboard"></canvas>
+            <div class="sideBar text-center">
+                <div class="color black"></div>
+                <div class="color red"></div>
+                <div class="color green"></div>
+                <div class="color blue"></div>
+                <div class="color white"></div>
+                <button id="clear" class="m-1 btn btn-danger">X</button>
             </div>
         </div>
     </div>
+</div>
 
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script src="./js/jquery-3.2.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+<script src="/socket.io/socket.io.js"></script>
+<script src="./js/jquery-3.2.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-    <script src="./js/bootstrap.js"></script>
-    <script src="./js/index.js"></script>
-    <script>
-        $('#sessionModal').modal('show');
-    </script>
+<script src="./js/bootstrap.js"></script>
+<script src="./js/index.js"></script>
+<script>
+    $('#sessionModal').modal('show');
+</script>
 </body>
-
 </html>

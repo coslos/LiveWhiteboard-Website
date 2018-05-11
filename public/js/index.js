@@ -21,7 +21,7 @@ $(document).ready(() => {
   $(window).resize(onResize);
   onResize();
 
-  $('#clear').click(function() {
+  $('#clear').click(() => {
     context.clearRect(0, 0, canvas.width, canvas.height);
   });
 
@@ -117,7 +117,7 @@ $(document).ready(() => {
 
   function throttle(callback, delay) {
     let previousCall = new Date().getTime();
-    return function() {
+    return function () {
       let time = new Date().getTime();
 
       if (time - previousCall >= delay) {
@@ -159,9 +159,9 @@ $(document).ready(() => {
       current.sessionId = data.sessionId;
       current.emitTo = 'drawingInSession';
       $topBar.empty().append(`
-        <div class="col-3 ml-auto text-white">Session Id: ${
-          data.sessionId
-        }</div>    
+        <div class="col-3 ml-auto text-white">
+          Session Id: ${data.sessionId}
+        </div> 
       `);
       context.clearRect(0, 0, canvas.width, canvas.height);
     }
@@ -173,9 +173,9 @@ $(document).ready(() => {
       current.sessionId = data.sessionId;
       current.emitTo = 'drawingInSession';
       $topBar.empty().append(`
-        <div class="col-3 ml-auto text-white">Session Id: ${
-          data.sessionId
-        }</div>    
+        <div class="col-3 ml-auto text-white">
+          Session Id: ${data.sessionId}
+        </div>   
       `);
       context.clearRect(0, 0, canvas.width, canvas.height);
     }
