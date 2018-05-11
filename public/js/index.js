@@ -4,7 +4,7 @@
 
 'use strict';
 
-$(document).ready(function () {
+$(document).ready(() => {
   const socket = io();
   const $topBar = $('#topBar');
   const canvas = document.getElementById('whiteboard');
@@ -21,7 +21,7 @@ $(document).ready(function () {
   $(window).resize(onResize);
   onResize();
 
-  $('#clear').click(function () {
+  $('#clear').click(() => {
     context.clearRect(0, 0, canvas.width, canvas.height);
   });
 
@@ -30,25 +30,24 @@ $(document).ready(function () {
   canvas.addEventListener('mouseout', onMouseUp);
   canvas.addEventListener('mousemove', throttle(onMouseMove, 5));
 
-  for (var i = 0; i < colors.length; i++) {
+  for (let i = 0; i < colors.length; i++) {
     colors[i].addEventListener('click', onColorUpdate, false);
   }
 
   socket.on('drawing', onDrawingEvent);
-  socket.on("createdSession", onCreatedSession);
-  socket.on("joinedSession", onJoinedSession);
-  socket.on("drawingInSession", onDrawingInSessionEvent);
+  socket.on('createdSession', onCreatedSession);
+  socket.on('joinedSession', onJoinedSession);
+  socket.on('drawingInSession', onDrawingInSessionEvent);
 
-  $('#createSession').click(function () {
-    socket.emit("createSession");
+  $('#createSession').click(() => {
+    socket.emit('createSession');
   });
 
-  $('#joinSession').click(function () {
-    socket.emit("joinSession", {
+  $('#joinSession').click(() => {
+    socket.emit('joinSession', {
       sessionId: $('#sessionIdJoinSession').val()
-    })
+    });
   });
-
 
   function drawLine(x0, y0, x1, y1, color, emit, strokeWidth) {
     y0 -= 50;
@@ -87,7 +86,6 @@ $(document).ready(function () {
       emitToServerObject.sessionId = current.sessionId;
     }
     socket.emit(current.emitTo, emitToServerObject);
-
   }
 
   function onMouseDown(e) {
@@ -117,13 +115,12 @@ $(document).ready(function () {
     current.color = e.target.className.split(' ')[1];
   }
 
-  // limit the number of events per second
   function throttle(callback, delay) {
     let previousCall = new Date().getTime();
     return function () {
       let time = new Date().getTime();
 
-      if ((time - previousCall) >= delay) {
+      if (time - previousCall >= delay) {
         previousCall = time;
         callback.apply(null, arguments);
       }
@@ -133,13 +130,29 @@ $(document).ready(function () {
   function onDrawingEvent(data) {
     let w = canvas.width;
     let h = canvas.height;
-    drawLine(data.x0 * w, data.y0 * h + 50, data.x1 * w, data.y1 * h + 50, data.color, false, data.strokeWidth);
+    drawLine(
+      data.x0 * w,
+      data.y0 * h + 50,
+      data.x1 * w,
+      data.y1 * h + 50,
+      data.color,
+      false,
+      data.strokeWidth
+    );
   }
 
   function onDrawingInSessionEvent(data) {
     let w = canvas.width;
     let h = canvas.height;
-    drawLine(data.x0 * w, data.y0 * h + 50, data.x1 * w, data.y1 * h + 50, data.color, false, data.strokeWidth);
+    drawLine(
+      data.x0 * w,
+      data.y0 * h + 50,
+      data.x1 * w,
+      data.y1 * h + 50,
+      data.color,
+      false,
+      data.strokeWidth
+    );
   }
 
   function onCreatedSession(data) {
@@ -148,7 +161,9 @@ $(document).ready(function () {
       current.sessionId = data.sessionId;
       current.emitTo = 'drawingInSession';
       $topBar.empty().append(`
-        <div class="col-3 ml-auto text-white">Session Id: ${data.sessionId}</div>
+        <div class="col-3 ml-auto text-white">
+          Session Id: ${data.sessionId}
+        </div> 
       `);
       context.clearRect(0, 0, canvas.width, canvas.height);
     }
@@ -160,13 +175,14 @@ $(document).ready(function () {
       current.sessionId = data.sessionId;
       current.emitTo = 'drawingInSession';
       $topBar.empty().append(`
-        <div class="col-3 ml-auto text-white">Session Id: ${data.sessionId}</div>
+        <div class="col-3 ml-auto text-white">
+          Session Id: ${data.sessionId}
+        </div>   
       `);
       context.clearRect(0, 0, canvas.width, canvas.height);
     }
   }
 
-  // make the canvas fill its parent
   function onResize() {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
